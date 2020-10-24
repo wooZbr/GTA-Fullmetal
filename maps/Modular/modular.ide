@@ -1,0 +1,27 @@
+objs
+19529, Plane125x125Grass1, beach_sfs, 200, 0
+19530, Plane125x125Sand1, beach_sfs, 200, 0
+19531, Plane125x125Conc1, cs_ebridge, 200, 0
+19532, 15x125Road1, cs_ebridge, 200, 0
+19533, 15x62_5Road1, cs_ebridge, 200, 0
+19534, 15x15RoadInters1, MatRoadInters1, 200, 0
+19535, 15x15RoadInters2, MatRoadInters1, 200, 0
+19536, Plane62_5x125Grass1, beach_sfs, 200, 0
+19537, Plane62_5x125Sand1, beach_sfs, 200, 0
+19538, Plane62_5x125Conc1, cs_ebridge, 200, 0
+19539, Edge62_5x62_5Grass1, beach_sfs, 200, 0
+19540, Edge62_5x62_5Grass2, beach_sfs, 200, 0
+19541, Edge62_5x15Grass1, beach_sfs, 200, 0
+19542, Edge62_5x125Grass1, beach_sfs, 200, 0
+19543, Plane62_5x15Grass1, beach_sfs, 200, 0
+19544, Plane62_5x15Sand1, beach_sfs, 200, 0
+19545, Plane62_5x15Conc1, cs_ebridge, 200, 0
+19546, Edge62_5x62_5Grass3, beach_sfs, 200, 0
+19547, Hill125x125Grass1, beach_sfs, 200, 0
+19480, Hill125x125GrassInverted, beach_sfs, 200, 0
+19548, Hill125x125Sand1, beach_sfs, 200, 0
+19549, Edge62_5x32_5Grass1, beach_sfs, 200, 0
+19550, Plane125x125Grass2, beach_sfs, 200, 0
+19551, Plane125x125Sand2, beach_sfs, 200, 0
+19552, Plane125x125Conc2, cs_ebridge, 200, 0
+end
