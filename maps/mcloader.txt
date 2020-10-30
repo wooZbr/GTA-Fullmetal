@@ -1,5 +1,0 @@
-IDE data\maps\modular.ide
-COLFILE 0 data\maps\modular.col
-IPL data\maps\mcroom.ipl
-IPL data\maps\mcenex.ipl
-IPL data\maps\islandone.ipl
