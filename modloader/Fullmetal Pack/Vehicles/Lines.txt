@@ -1,0 +1,11 @@
+vehicles
+12501,	stanier,	stanier,	car,		STANIER,	STANIER,	null,	executive,	10,	0,	0,		-1, 0.7, 0.7,		0
+
+carcols
+stanier, 1,1, 0,0, 33,33, 43,43, 79,79, 61,61, 67,67
+
+handling
+STANIER 1800.0 4500.0 2.2 0.0 0.2 -0.10 75 0.65 0.9 0.5 4 200.00 19.0 10.0 R P 9.0 0.55 0 30.0 1.1 0.15 0.0 0.20 -0.05 0.54 0.3 0.2 0.56 35000 40000000 00000001 1 0 0
+
+carmods
+stanier, nto_b_l, nto_b_s, nto_b_tw, bnt_b_sc_l, bnt_b_sc_m, rf_b_sc_r, spl_b_bbb_m, exh_b_m, exh_b_l 
