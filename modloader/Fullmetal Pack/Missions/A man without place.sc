@@ -3,7 +3,7 @@ SCRIPT_START
 NOP
 WAIT 0
 
-LVAR_INT scplayer tblip[6] enem[6] area i yakmodel rped task_status
+LVAR_INT scplayer tblip[6] enem[6] area i yakmodel walkany task_status boat
 LVAR_FLOAT x y z enemX enemY genX genY genX2 genY2
 GET_PLAYER_CHAR 0 scplayer
 i = 0
@@ -30,61 +30,71 @@ WAIT 5000
 PRINT_STRING_NOW "Dominate this artificial island!" 5000
 WAIT 5000
 
-aviao:
-DO_FADE 1000 0
+barco:
+DO_FADE 2000 0
     WAIT 2000
-    //SET_AREA_VISIBLE 9
-    SET_CHAR_AREA_VISIBLE scplayer 9
-    LOAD_SCENE -6555.7251 -2599.7314 995.7842
-    SET_CHAR_COORDINATES scplayer -6555.7251 -2599.7314 995.7842
-    SET_FIXED_CAMERA_POSITION -6552.6548, -2601.7776, 996.5732 0.0 0.0 0.0
-    POINT_CAMERA_AT_POINT -6553.5361, -2601.3079, 996.4183 2
-        REQUEST_MODEL 46        //parachute
-        REQUEST_MODEL 358       //SNIPER
+    LOAD_SCENE  -6210.00000, -2575.00000, 3.00000
+    SET_CHAR_COORDINATES scplayer -7495.3467, -2107.3018, -100.0
+    REQUEST_MODEL 358       //SNIPER
+        REQUEST_MODEL 446       //SQUALO
         REQUEST_MODEL 355       //AK
         REQUEST_MODEL 347       //silenced
         REQUEST_MODEL 335       //FACA
         REQUEST_MODEL 14200
         REQUEST_MODEL 14201
         REQUEST_MODEL 14202
-    LOAD_ALL_MODELS_NOW
-    GIVE_WEAPON_TO_CHAR scplayer WEAPONTYPE_PARACHUTE 1   //paraquedas
+        LOAD_ALL_MODELS_NOW
     GIVE_WEAPON_TO_CHAR scplayer WEAPONTYPE_PISTOL_SILENCED 100
     GIVE_WEAPON_TO_CHAR scplayer WEAPONTYPE_SNIPERRIFLE 40
     GIVE_WEAPON_TO_CHAR scplayer WEAPONTYPE_KNIFE 1
-    SET_CURRENT_CHAR_WEAPON scplayer 0
+    CREATE_CAR 446 -7495.3467, -2107.3018, -100.0 boat
+    SET_CAR_HEADING boat -90.0
+    TASK_WARP_CHAR_INTO_CAR_AS_DRIVER scplayer boat
+    ADD_SPRITE_BLIP_FOR_COORD -6501.1396, -2691.6292, 1.0342 13 tblip[0]
     SET_PLAYER_CONTROL 0 TRUE
     RESTORE_CAMERA_JUMPCUT
     DISPLAY_HUD 1
     DISPLAY_RADAR 1
-DO_FADE 1000 1
+    WAIT 2000
+DO_FADE 2000 1
 
-waiting_jump:
-WAIT 0
-GET_CHAR_COORDINATES scplayer x y z
-
-IF z < 882.0000
-    SET_AREA_VISIBLE 0
-    SET_CHAR_AREA_VISIBLE scplayer 0
-    ADD_SPRITE_BLIP_FOR_COORD -6374.8394, -2686.3398, 6.1074 13 tblip[0]
-    GOTO jumped
-ENDIF
-
-GOTO waiting_jump
 
 jumped:
 WAIT 0
-IF LOCATE_CHAR_ANY_MEANS_3D scplayer -6364.7793, -2706.0269, 1.6384 (15.0 15.0 10.0) TRUE
-    GOTO pousou
-    REMOVE_BLIP tblip[0]
-    WHILE LOCATE_CHAR_ANY_MEANS_3D scplayer -6374.8394, -2686.3398, 6.1074 (5.0 5.0 3.0) TRUE
-        WAIT 0
-    ENDWHILE
-ENDIF
+    //IF LOCATE_CHAR_ANY_MEANS_3D scplayer -6501.1396, -2691.6292, 1.0342 (15.0 15.0 10.0) TRUE
+    IF IS_CHAR_IN_AREA_2D scplayer -6373.9746, -2723.2822 -6545.8320, -2570.4727 1
+        REMOVE_BLIP tblip[0]
+        GOTO taskzin
+        WHILE LOCATE_CHAR_ANY_MEANS_3D scplayer -6501.1396, -2691.6292, 1.0342 (5.0 5.0 3.0) TRUE
+            WAIT 0
+        ENDWHILE
+    ENDIF
 GOTO jumped     //14200 14201 14202 YAKUZAS
+
+taskzin:
+    OPEN_SEQUENCE_TASK walkany
+
+        
+        SWITCH task_status
+            DEFAULT
+                TASK_LOOK_ABOUT -1 60000
+                BREAK
+            CASE 1
+                GENERATE_RANDOM_FLOAT_IN_RANGE -6361.9932 -6178.9521 genX
+                GENERATE_RANDOM_FLOAT_IN_RANGE -2799.3613 -2412.9363 genY
+                TASK_GO_STRAIGHT_TO_COORD -1 genX genY -100.0 4 -2
+                BREAK
+            CASE 2
+                SET_NEXT_DESIRED_MOVE_STATE 4
+                TASK_GOTO_CHAR -1 scplayer -2 3.0
+                BREAK
+        ENDSWITCH
+    CLOSE_SEQUENCE_TASK walkany
+GOTO pousou
 
 pousou:
 WAIT 0
+
     IF i < 5
         genX = -6339.2778
         genY = -2762.0740
@@ -146,9 +156,8 @@ CREATE_CHAR PEDTYPE_GANG9 yakmodel enemX enemY -100.0 enem[i]
 ADD_BLIP_FOR_CHAR enem[i] tblip[i]
 GIVE_WEAPON_TO_CHAR enem[i] WEAPONTYPE_AK47 1000
 SET_CHAR_ACCURACY enem[i] 70
-GENERATE_RANDOM_FLOAT_IN_RANGE -6339.2778 -6209.9048 x
-GENERATE_RANDOM_FLOAT_IN_RANGE -2762.0740 -2635.0081 y
-TASK_LOOK_AT_COORD enem[i] x y -100.0 10
+GENERATE_RANDOM_INT_IN_RANGE 0 3 task_status
+PERFORM_SEQUENCE_TASK enem[i] walkany
 i = i + 1
 RETURN
 
