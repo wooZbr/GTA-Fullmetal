@@ -62,7 +62,7 @@ DO_FADE 2000 1
 jumped:
 WAIT 0
     //IF LOCATE_CHAR_ANY_MEANS_3D scplayer -6501.1396, -2691.6292, 1.0342 (15.0 15.0 10.0) TRUE
-    IF IS_CHAR_IN_AREA_2D scplayer -6373.9746, -2723.2822 -6545.8320, -2570.4727 1
+    IF IS_CHAR_IN_AREA_2D scplayer -6373.9746, -2723.2822 -6545.8320, -2570.4727 0
         REMOVE_BLIP tblip[0]
         GOTO taskzin
         WHILE LOCATE_CHAR_ANY_MEANS_3D scplayer -6501.1396, -2691.6292, 1.0342 (5.0 5.0 3.0) TRUE
@@ -96,10 +96,10 @@ pousou:
 WAIT 0
 
     IF i < 5
-        genX = -6339.2778
-        genY = -2762.0740
-        genX2 = -6209.9048
-        genY2 = -2635.0081
+        genX = -6332.3682
+        genY = -2864.2725
+        genX2 = -6210.3428
+        genY2 = -2763.7090
         area = 1
         GOSUB gerar_yakuza
     ENDIF
@@ -112,10 +112,10 @@ GOTO pousou
 area2:
 WAIT 0
     IF i < 5
-        genX = -6342.7031
-        genY = -2628.0930
-        genX2 = -6209.6919
-        genY2 = -2506.4958
+        genX = -6354.9492
+        genY = -2722.6025
+        genX2 = -6197.1860
+        genY2 = -2637.0979
         area = 2
         GOSUB gerar_yakuza
     ENDIF
@@ -128,10 +128,10 @@ GOTO area2
 area3:
 WAIT 0
     IF i < 5
-        genX = -6341.3057
-        genY = -2485.0156
-        genX2 = -6238.0776
-        genY2 = -2415.3289
+        genX = -6209.3462
+        genY = -2634.8918
+        genX2 = -6359.3369
+        genY2 = -2546.9678
         area = 3
         GOSUB gerar_yakuza
     ENDIF
@@ -142,8 +142,17 @@ WAIT 0
 GOTO area3
 
 area4:
-    GOTO end
+    genX = -6380.9541
+    genY = -2542.2095
+    genX2 = -6256.4399
+    genY2 = -2480.0559
+    area = 4
+    GOSUB gerar_yakuza
 GOTO area4
+
+area5:
+    GOTO end
+GOTO area5
 
 GOTO end
 //--------------------------------------------------------------
